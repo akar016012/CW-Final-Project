@@ -28,7 +28,7 @@
 
 				<!-- Nav buttons -->
 				<li class="nav-item">
-					<button class="btn btn-outline-danger  modal-pre-auth" data-bs-toggle="modal"
+					<button class="btn btn-outline-danger  menu-pre-auth" data-bs-toggle="modal"
 						data-bs-target="#modal-signin">Sign In/Up</button>
 				</li>
 
@@ -90,7 +90,8 @@
 
 				<!-- sign out button -->
 				<li class="nav-item">
-					<button id="menu-admin-signout" class="btn btn-outline-danger  menu-post-auth menu-admin-auth">Sign
+					<button id="menu-signout"
+						class="btn btn-outline-danger menu-post-auth menu-user-auth menu-admin-auth">Sign
 						Out</button>
 				</li>
 				<!-- sign out button -->
@@ -281,7 +282,7 @@
 		</div>
 	</div>
 
-	<div id="main-content" class="jumbotron"></div>
+	<div id="root" class="bg-light p-5 m-3"></div>
 
 	<!-- update the version number as needed -->
 	<script defer src="/__/firebase/8.9.1/firebase-app.js"></script>

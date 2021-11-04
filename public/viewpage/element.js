@@ -73,3 +73,36 @@ export const modalTransactionTitle = document.getElementById(
 export const modalTransactionBody = document.getElementById(
   "modal-transaction-body"
 );
+
+//root element
+export const root = document.getElementById("root");
+
+//modals
+export const modalSignin = new bootstrap.Modal(
+  document.getElementById("modal-signin"),
+  { backdrop: "static" }
+);
+
+export const modalInfo = new bootstrap.Modal(
+  document.getElementById("modal-info"),
+  { backdrop: "static" }
+);
+
+export const modalTransactionView = new bootstrap.Modal(
+  document.getElementById("modal-transaction-view"),
+  { backdrop: "static" }
+);
+
+export const modalSignup = new bootstrap.Modal(
+  document.getElementById("modal-signup"),
+  { backdrop: "static" }
+);
+
+export const formSignUpPasswordError = document.getElementById(
+  "form-signup-password-error"
+);
+
+export const modalAddProduct = new bootstrap.Modal(
+  document.getElementById("modal-add-product"),
+  { backdrop: "static" }
+);
