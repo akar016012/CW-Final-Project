@@ -73,7 +73,6 @@ export function addEventListeners() {
         }
         let menuHome = document.getElementsByClassName("menu-home-auth")[0];
         menuHome.style.display = "none";
-
         history.pushState(null, null, Routes.routePathnames.USER);
         Routes.routing(window.location.pathname, window.location.hash);
       }
