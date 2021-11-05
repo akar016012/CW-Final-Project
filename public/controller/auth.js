@@ -48,6 +48,8 @@ export function addEventListeners() {
   firebase.auth().onAuthStateChanged(async (user) => {
     if (user) {
       currentUser = user;
+      await UserProfilePage.getAccountInfo(user);
+      UserPage.initShoppingCarts();
       let elements = document.getElementsByClassName("menu-pre-auth");
       for (let i = 0; i < elements.length; i++) {
         elements[i].style.display = "none";
@@ -76,20 +78,19 @@ export function addEventListeners() {
         history.pushState(null, null, Routes.routePathnames.USER);
         Routes.routing(window.location.pathname, window.location.hash);
       }
-      // user signed out
-      else {
-        currentUser = null;
-        let elements = document.getElementsByClassName("menu-pre-auth");
-        for (let i = 0; i < elements.length; i++) {
-          elements[i].style.display = "block";
-        }
-        elements = document.getElementsByClassName("menu-post-auth");
-        for (let i = 0; i < elements.length; i++) {
-          elements[i].style.display = "none";
-        }
-        history.pushState(null, null, Routes.routePathnames.HOME);
-        Routes.routing(window.location.pathname, window.location.hash);
-      }
+    }
+    // user signed out
+    else {
+      //signed out
+      currentUser = null;
+      let elements = document.getElementsByClassName("menu-pre-auth");
+      for (let i = 0; i < elements.length; i++)
+        elements[i].style.display = "block";
+      elements = document.getElementsByClassName("menu-post-auth");
+      for (let i = 0; i < elements.length; i++)
+        elements[i].style.display = "none";
+      history.pushState(null, null, Routes.routePathnames.HOME);
+      Routes.routing(window.location.pathname, window.location.hash);
     }
   });
   Element.formSignup.addEventListener("click", () => {

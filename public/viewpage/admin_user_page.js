@@ -7,9 +7,9 @@ import * as Auth from "../controller/auth.js";
 
 export function addEventListeners() {
   Element.menuAdminUsers.addEventListener("click", async () => {
-    history.pushState(null, null, Routes.routePathname.USERS);
+    history.pushState(null, null, Routes.routePathnames.ADMINUSER);
     const label = Util.disabledButton(Element.menuAdminUsers);
-    await users_page();
+    await admin_user_page();
     Util.enableButton(Element.menuAdminUsers, label);
   });
 }
@@ -22,7 +22,7 @@ export async function admin_user_page() {
 
   let userList;
   try {
-    // userList = await FirebaseController.getUserList();
+    userList = await FirebaseController.getUserList();
     html += `
     <table class="table table-striped">
     <thead>
@@ -87,7 +87,7 @@ export async function admin_user_page() {
       const uid = e.target.uid.value;
 
       try {
-        // await FirebaseController.deleteUser(uid);
+        await FirebaseController.deleteUser(uid);
         document.getElementById(`user-row-${uid}`).remove();
         Util.info("Deleted!", `User deleted: uid=${uid}`);
       } catch (e) {

@@ -6,7 +6,7 @@ export class Product {
     this.summary = data.summary;
     this.imageName = data.imageName;
     this.imageURL = data.imageURL;
-    this.qty = Number.isInteger(data.qty) ? data.qty : null;
+    this.qty = data.qty;
   }
 
   serialize() {

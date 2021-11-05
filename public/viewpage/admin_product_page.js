@@ -4,7 +4,7 @@ import * as FirebaseController from "../controller/firebase_controller.js";
 import * as Constant from "../model/constant.js";
 import * as Util from "./util.js";
 import * as Routes from "../controller/routes.js";
-// import * as Edit from "../controller/edit_product.js";
+import * as Edit from "../controller/edit_products.js";
 import * as Auth from "../controller/auth.js";
 
 let imageFile2Upload;
@@ -13,8 +13,8 @@ export function addEventListener() {
   Element.menuAdminProducts.addEventListener("click", async () => {
     history.pushState(null, null, Routes.routePathnames.ADMINPRODUCTS);
     const button = Element.menuAdminProducts;
-    const label = Util.disableButton(button);
-    await product_page();
+    const label = Util.disabledButton(button);
+    await admin_product_page();
     // await Util.sleep(1000);
     Util.enableButton(button, label);
   });
@@ -23,7 +23,7 @@ export function addEventListener() {
     const button = e.target.getElementsByTagName("button")[0];
     const label = Util.disabledButton(button);
     await addNewProduct(e.target);
-    await product_page();
+    await admin_product_page();
     Util.enableButton(button, label);
   });
 
@@ -79,7 +79,7 @@ export async function admin_product_page() {
       e.preventDefault();
       const button = e.target.getElementsByTagName("button")[0];
       const label = Util.disabledButton(button);
-      //   await Edit.edit_product(e.target.docId.value);
+      await Edit.edit_product(e.target.docId.value);
       Util.enableButton(button, label);
     });
   }
@@ -106,7 +106,7 @@ async function addNewProduct(form) {
 
   const errors = product.validate(imageFile2Upload);
 
-  Element.formAddProduct.errorName.innerHTML = errors.name ? errors.name : "";
+  Element.formAddProductError.name.innerHTML = errors.name ? errors.name : " ";
   Element.formAddProduct.errorPrice.innerHTML = errors.price
     ? errors.price
     : "";
@@ -129,7 +129,7 @@ async function addNewProduct(form) {
     );
     product.imageName = imageName;
     product.imageURL = imageURL;
-    // await FirebaseController.addProduct(product.serialize());
+    await FirebaseController.addProduct(product.serialize());
     Util.info("Success!", `${product.name} added!`, Element.modalAddProduct);
   } catch (e) {
     if (Constant.DEV) console.log(e);

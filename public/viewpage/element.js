@@ -2,14 +2,14 @@
 
 export const menuHome = document.getElementById("menu-home");
 export const menuSignOut = document.getElementById("menu-signout");
-export const menuProfile = document.getElementById("menu-profile");
+export const menuProfile = document.getElementById("menu-button-profile");
 export const menuShoppingCart = document.getElementById(
   "menu-button-shoppingcart"
 );
 
 //users buttons
 export const menuUserPurchases = document.getElementById("menu-user-purchases");
-export const menuUserProfucts = document.getElementById("menu-user-products");
+export const menuUserProducts = document.getElementById("menu-user-products");
 export const menuUserProductReview = document.getElementById(
   "menu-user-product-reviews"
 );
@@ -34,7 +34,15 @@ export const menuSignup = document.getElementById("button-form-signup");
 export const formSignIn = document.getElementById("form-signin");
 
 //Add new Products
-export const formAddProduct = document.getElementById("form-add-product");
+export const formAddProduct = {
+  form: document.getElementById("form-add-product"),
+  errorName: document.getElementById("form-add-product-error-name"),
+  errorPrice: document.getElementById("form-add-product-error-price"),
+  errorSummary: document.getElementById("form-add-product-error-summary"),
+  imageTag: document.getElementById("form-add-product-image-tag"),
+  imageButton: document.getElementById("form-add-product-image-button"),
+  errorImage: document.getElementById("form-add-product-error-image"),
+};
 export const formAddProductError = {
   name: document.getElementById("form-add-product-error-name"),
   price: document.getElementById("form-add-product-error-price"),
@@ -49,18 +57,19 @@ export const formImageAddButton = document.getElementById(
 );
 
 //edit products
-export const formEditProduct = document.getElementById("form-edit-product");
+export const formEditProduct = {
+  form: document.getElementById("form-edit-product"),
+  imageTag: document.getElementById("form-edit-product-image-tag"),
+  imageButton: document.getElementById("form-edit-product-image-button"),
+  errorName: document.getElementById("form-edit-product-error-name"),
+  errorPrice: document.getElementById("form-edit-product-error-price"),
+  errorSummary: document.getElementById("form-edit-product-error-summary"),
+  errorImage: document.getElementById("form-edit-product-error-image"),
+};
+
 export const formEditImageTag = document.getElementById(
   "form-edit-product-image-tag"
 );
-export const formEditProductImageButton = document.getElementById(
-  "form-edit-product-image-tag"
-);
-export const formEditProductError = {
-  name: document.getElementById("form-edit-product-error-name"),
-  price: document.getElementById("form-edit-product-error-price"),
-  summary: document.getElementById("form-edit-product-error-summary"),
-};
 
 //popup infobox
 export const popupInfoTilte = document.getElementById("modal-info-title");
@@ -106,3 +115,10 @@ export const modalAddProduct = new bootstrap.Modal(
   document.getElementById("modal-add-product"),
   { backdrop: "static" }
 );
+
+export const modalEditProduct = new bootstrap.Modal(
+  document.getElementById("modal-edit-product"),
+  { backdrop: "static" }
+);
+
+export const shoppingcartCount = document.getElementById("shoppingcart-count");

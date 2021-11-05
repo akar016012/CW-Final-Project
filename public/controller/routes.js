@@ -15,7 +15,7 @@ import * as AdminReviewCheck from "../viewpage/admin_review_check_page.js";
 import * as AdminUserPage from "../viewpage/admin_user_page.js";
 
 export const routePathnames = {
-  HOME: "/home",
+  HOME: "/",
   USER: "/user",
   REVIEWS: "/reviews",
   USERPROFILE: "/profile",
@@ -30,24 +30,24 @@ export const routePathnames = {
 
 export const routes = [
   { pathname: routePathnames.HOME, page: HomePage.home_page },
-  // { pathname: routePathnames.USER, page: UserPage.user_page },
+  { pathname: routePathnames.USER, page: UserPage.user_page },
   // { pathname: routePathnames.REVIEWs, page: ReviewPage.reviews_page },
-  // {
-  //   pathname: routePathnames.USERPROFILE,
-  //   page: UserProfilePage.user_profile_page,
-  // },
-  // {
-  //   pathname: routePathnames.USERPURCASES,
-  //   page: UserPurchasePage.user_purchases_page,
-  // },
+  {
+    pathname: routePathnames.USERPROFILE,
+    page: UserProfilePage.user_profile_page,
+  },
+  {
+    pathname: routePathnames.USERPURCASES,
+    page: UserPurchasePage.user_purchases_page,
+  },
   // {
   //   pathname: routePathnames.USERREVIEWS,
   //   page: UserReviewPage.user_reviews_page,
   // },
-  // {
-  //   pathname: routePathnames.USERSHOPPINGCART,
-  //   page: UserShoppingCartPage.user_shopping_cart_page,
-  // },
+  {
+    pathname: routePathnames.USERSHOPPINGCART,
+    page: UserShoppingCartPage.user_shopping_cart_page,
+  },
   {
     pathname: routePathnames.ADMINPRODUCTS,
     page: AdminProductPage.admin_product_page,
