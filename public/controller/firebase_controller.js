@@ -1,5 +1,5 @@
 import { AccountInfo } from "../model/account_info.js";
-import { Product } from "../model/product.js";
+import { Product } from "../model/Product.js";
 import * as Constant from "../model/constant.js";
 import { ShoppingCart } from "../model/ShoppingCart.js";
 
