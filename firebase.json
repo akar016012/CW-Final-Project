@@ -1,6 +1,6 @@
 {
   "hosting": {
-    "site":"sprint1adityakarfinalproject",
+    "site":"finalprojectsprint1adityakar",
     "public": "public",
     "ignore": [
       "firebase.json",
