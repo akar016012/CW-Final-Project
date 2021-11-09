@@ -23,6 +23,7 @@ export function addEventListener() {
     const button = e.target.getElementsByTagName("button")[0];
     const label = Util.disabledButton(button);
     await addNewProduct(e.target);
+    Element.modalAddProduct.hide();
     await admin_product_page();
     Util.enableButton(button, label);
   });
@@ -37,7 +38,25 @@ export function addEventListener() {
     reader.onload = () => (Element.formAddProduct.imageTag.src = reader.result);
     reader.readAsDataURL(imageFile2Upload);
   });
+
+  Element.formAdminSearch.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const searchButton =
+      Element.formAdminSearch.getElementsByTagName("button")[0];
+    const searchKeyword = e.target.searchKeyword.value;
+
+    if (searchKeyword.length == 0) {
+      Util.info(
+        "Invalid Search Entry",
+        "Enter the title of the product to search!!"
+      );
+      return;
+    }
+    search_admin_page(searchKeyword);
+    e.target.searchKeyword.value = "";
+  });
 }
+export let products;
 
 export async function admin_product_page() {
   if (!Auth.currentUser) return;
@@ -48,7 +67,6 @@ export async function admin_product_page() {
     </div>
   `;
 
-  let products;
   try {
     products = await FirebaseController.getProductList();
   } catch (e) {
@@ -104,21 +122,6 @@ async function addNewProduct(form) {
 
   const product = new Product({ name, price, summary });
 
-  const errors = product.validate(imageFile2Upload);
-
-  Element.formAddProductError.name.innerHTML = errors.name ? errors.name : " ";
-  Element.formAddProduct.errorPrice.innerHTML = errors.price
-    ? errors.price
-    : "";
-  Element.formAddProduct.errorSummary.innerHTML = errors.summary
-    ? errors.summary
-    : "";
-  Element.formAddProduct.errorImage.innerHTML = errors.image
-    ? errors.image
-    : "";
-
-  if (Object.keys(errors).length != 0) return; //error exists
-
   // save the product object in Firebase
   //1. upload the image into Cloud Storage database => image name, url
   //2. store product info to Firestore with image info
@@ -131,6 +134,7 @@ async function addNewProduct(form) {
     product.imageURL = imageURL;
     await FirebaseController.addProduct(product.serialize());
     Util.info("Success!", `${product.name} added!`, Element.modalAddProduct);
+    await admin_product_page();
   } catch (e) {
     if (Constant.DEV) console.log(e);
     Util.info("Add Product failed", JSON.stringify(e), Element.modalAddProduct);
@@ -146,13 +150,61 @@ function buildProductCard(product) {
         </div>
         <form class="form-edit-product float-start" method="post">
           <input type="hidden" name="docId" value="${product.docId}">
-          <button class="btn btn-outline-primary" type="submit">Edit</button>
+          <button class="btn btn-primary" type="submit">Edit</button>
         </form>
         <form class="form-delete-product float-end" method="post">
           <input type="hidden" name="docId" value="${product.docId}">
           <input type="hidden" name="imageName" value="${product.imageName}">
-          <button class="btn btn-outline-danger" type="submit">Delete</button>
+          <button class="btn btn-danger" type="submit">Delete</button>
         </form>
   </div>
   `;
+}
+
+export function searchResult(products) {
+  let html = "";
+  let index = 0;
+  products.forEach((product) => {
+    html += buildProductCard(product, index);
+    ++index;
+  });
+
+  Element.root.innerHTML = html;
+}
+
+export async function search_admin_page(searchKeyword) {
+  if (!Auth.currentUser) {
+    Element.root.innerHTML = "<h1>Protected Page</h1>";
+    return;
+  }
+
+  try {
+    products = await FirebaseController.searchProduct(searchKeyword);
+    searchResult(products);
+  } catch (e) {
+    if (Constant.DEV) console.log(e);
+    return;
+  }
+  const editforms = document.getElementsByClassName("form-edit-product");
+  for (let i = 0; i < editforms.length; i++) {
+    editforms[i].addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const button = e.target.getElementsByTagName("button")[0];
+      const label = Util.disabledButton(button);
+      await Edit.edit_product(e.target.docId.value);
+      Util.enableButton(button, label);
+    });
+  }
+
+  const deleteForms = document.getElementsByClassName("form-delete-product");
+  for (let i = 0; i < deleteForms.length; i++) {
+    deleteForms[i].addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!window.confirm("Press OK to delete.")) return; //cancel button pressed
+      const button = e.target.getElementsByTagName("button")[0];
+      const label = Util.disabledButton(button);
+      await Edit.delete_product(e.target.docId.value, e.target.imageName.value);
+      Util.enableButton(button, label);
+    });
+  }
 }

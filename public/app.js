@@ -8,6 +8,7 @@ import * as UserPurchases from "./viewpage/user_purchases_page.js";
 import * as AdminUsers from "./viewpage/admin_user_page.js";
 import * as AdminHome from "./viewpage/admin_product_page.js";
 import * as Edit from "./controller/edit_products.js";
+
 Auth.addEventListeners();
 HomePage.addEventListeners();
 UserShoppingCartPage.addEventListeners();

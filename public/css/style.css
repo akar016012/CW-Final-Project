@@ -1,3 +1,7 @@
+body{
+    background-image: url("https://media.istockphoto.com/vectors/set-of-100-geometric-shapes-design-retro-elements-for-web-vintage-vector-id1176500179");
+}
+
 .error-add-product{
     color:red;
 }
@@ -5,13 +9,23 @@
 .error-add-review{
     color:red;
 }
+.card{
+background: url("https://image.freepik.com/free-vector/diamond-shape-golden-pattern-vector-background_1017-13783.jpg");
+background-size:contain;
+}
 
+
+.card-text{
+    font-weight: bold;
+    font-family: 'Courier New', Courier, monospace;
+  
+}
 .my-banner {
     width: 100%;
     font-size: 200%;
     text-align: center;
-    color: rgb(3, 3, 3)e;
-    background-color: orange;
+    color: rgb(255, 255, 255);
+    background-color: rgb(49, 139, 26);
 }
 
 li{
@@ -29,8 +43,12 @@ li{
 
 input {
     display: block;
-    margin: 8px 0;
-    padding: 8px 2px;
-    border-width: 0 0;
-    width: 100%;
+	margin: 8px 0;
+	padding: 8px 2px;
+	border-width: 0 0 2px 0;
+	width: 100%;
+}
+textarea{
+	width: 100%;
+	min-height: 150px;
 }

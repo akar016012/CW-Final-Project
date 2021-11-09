@@ -14,6 +14,7 @@ export const menuUserProductReview = document.getElementById(
   "menu-user-product-reviews"
 );
 export const formSearch = document.getElementById("form-search");
+export const formAdminSearch = document.getElementById("form-admin-search");
 
 //admin buttons
 export const menuAdminPurchases = document.getElementById(
@@ -43,12 +44,7 @@ export const formAddProduct = {
   imageButton: document.getElementById("form-add-product-image-button"),
   errorImage: document.getElementById("form-add-product-error-image"),
 };
-export const formAddProductError = {
-  name: document.getElementById("form-add-product-error-name"),
-  price: document.getElementById("form-add-product-error-price"),
-  summary: document.getElementById("form-add-product-error-summary"),
-  image: document.getElementById("form-add-product-error-image"),
-};
+
 export const imageTagProduct = document.getElementById(
   "form-add-product-image-tag"
 );

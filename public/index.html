@@ -56,15 +56,6 @@
 					<button id="menu-user-product-reviews"
 						class="btn btn-outline-danger menu-post-auth menu-user-auth">My Reviews</button>
 				</li>
-
-				<!-- <li class="nav-item">
-					<form id="form-search" class="form-inline  menu-post-auth menu-user-auth">
-						<input name="searchKeyword" class="form-control mr-sm-4" type="search"
-							placeholder="Search a product" aria-label="Search" required>
-						<button class="btn btn-outline-success " type="submit">Search</button>
-					</form>
-				</li> -->
-
 				<!-- Users buttons -->
 
 				<!-- Admin buttons -->
@@ -109,7 +100,27 @@
 			</button>
 
 		</div>
+		<!-- search button -->
+		<ul class="nav-item">
+			<form id="form-search" class="form-search menu-post-auth menu-user-auth">
+				<input name="searchKeyword" class="form-control mr-sm-4 " type="search" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-warning " type="submit">Search</button>
+			</form>
+		</ul>
+
+		<ul class="nav-item">
+			<form id="form-admin-search" class="form-search menu-post-auth menu-admin-auth">
+				<input name="searchKeyword" class="form-control mr-sm-4 " type="search" placeholder="Search"
+					aria-label="Search">
+				<button class="btn btn-info " type="submit">Search</button>
+			</form>
+		</ul>
 		</div>
+
+
+
+
 	</nav>
 
 	<!-- Modal: Sign Up -->

@@ -103,7 +103,7 @@ export async function uploadImage(imageFile, imageName) {
   const ref = firebase
     .storage()
     .ref()
-    .child(Constant.storageFolderNames.PRODUCT_IMAGES + imageName);
+    .child(Constant.storageFolderName.PRODUCTS_IMAGES + imageName);
 
   const taskSnapShot = await ref.put(imageFile);
   const imageURL = await taskSnapShot.ref.getDownloadURL();
@@ -156,7 +156,7 @@ export async function deleteProduct(docId, imageName) {
   const ref = firebase
     .storage()
     .ref()
-    .child(Constant.storageFolderNames.PRODUCT_IMAGES + imageName);
+    .child(Constant.storageFolderName.PRODUCTS_IMAGES + imageName);
 
   await ref.delete();
 }
@@ -175,4 +175,19 @@ export async function updateUser(uid, update) {
 const cf_deleteUser = firebase.functions().httpsCallable("cf_deleteUser");
 export async function deleteUser(uid) {
   await cf_deleteUser(uid);
+}
+
+export async function searchProduct(keyword) {
+  const productList = [];
+  const snapShot = await firebase
+    .firestore()
+    .collection(Constant.collectionNames.PRODUCTS)
+    .where("name", "==", keyword)
+    .get();
+  snapShot.forEach((doc) => {
+    const prod = new Product(doc.data());
+    prod.docId = doc.id;
+    productList.push(prod);
+  });
+  return productList;
 }

@@ -14,13 +14,28 @@ export function addEventListeners() {
     await user_page();
     Util.enableButton(Element.menuHome, label);
   });
-}
 
+  Element.formSearch.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const searchButton = Element.formSearch.getElementsByTagName("button")[0];
+    const searchKeyword = e.target.searchKeyword.value;
+
+    if (searchKeyword.length == 0) {
+      Util.info(
+        "Invalid Search Entry",
+        "Enter the title of the product to search!!"
+      );
+      return;
+    }
+    search_page(searchKeyword);
+    e.target.searchKeyword.value = "";
+  });
+}
+export let products;
 export let cart;
 
 export async function user_page() {
   let html = `<h1>Enjoy Shopping</h1>`;
-  let products;
   try {
     products = await FirebaseController.getProductList();
     if (cart) {
@@ -103,4 +118,57 @@ export function initShoppingCarts() {
     cart = new ShoppingCart(Auth.currentUser.uid);
   }
   Element.shoppingcartCount.innerHTML = cart.getTotalQty();
+}
+
+export function searchResult(products) {
+  let html = "";
+  let index = 0;
+  products.forEach((product) => {
+    html += buildProductView(product, index);
+    ++index;
+  });
+
+  Element.root.innerHTML = html;
+}
+
+export async function search_page(searchKeyword) {
+  if (!Auth.currentUser) {
+    Element.root.innerHTML = "<h1>Protected Page</h1>";
+    return;
+  }
+
+  try {
+    products = await FirebaseController.searchProduct(searchKeyword);
+    searchResult(products);
+  } catch (e) {
+    if (Constant.DEV) console.log(e);
+    return;
+  }
+
+  //- minus button function ⬇
+  const decForms = document.getElementsByClassName("form-dec-qty");
+  for (let i = 0; i < decForms.length; i++) {
+    decForms[i].addEventListener("submit", (e) => {
+      e.preventDefault();
+      const p = products[e.target.index.value];
+      cart.removeItem(p);
+      document.getElementById("qty-" + p.docId).innerHTML =
+        p.qty == null || p.qty == 0 ? "Add" : p.qty;
+      Element.shoppingcartCount.innerHTML = cart.getTotalQty();
+    });
+  }
+  //- minus button function ⬆
+  //+ minus button function ⬇
+
+  const incForms = document.getElementsByClassName("form-inc-qty");
+  for (let i = 0; i < decForms.length; i++) {
+    incForms[i].addEventListener("submit", (e) => {
+      e.preventDefault();
+      const p = products[e.target.index.value];
+      cart.addItem(p);
+      document.getElementById("qty-" + p.docId).innerHTML = p.qty;
+      Element.shoppingcartCount.innerHTML = cart.getTotalQty();
+    });
+  }
+  //+ minus button function ⬆
 }
