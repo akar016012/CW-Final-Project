@@ -56,6 +56,10 @@
 					<button id="menu-user-product-reviews"
 						class="btn btn-outline-danger menu-post-auth menu-user-auth">My Reviews</button>
 				</li>
+				<li class="nav-item">
+					<button id="menu-user-contact" class="btn btn-success menu-post-auth menu-user-auth">Contact
+						Store</button>
+				</li>
 				<!-- Users buttons -->
 
 				<!-- Admin buttons -->
@@ -67,6 +71,7 @@
 					<button id="menu-admin-users"
 						class="btn btn-outline-primary  menu-post-auth menu-admin-auth">User</button>
 				</li>
+
 				<!-- <li class="nav-item">
 					<button id="menu-admin-purchases"
 						class="btn btn-outline-primary menu-post-auth menu-admin-auth">Purchases</button>
@@ -217,6 +222,41 @@
 						</div>
 						<div>
 							<button type="submit" class="btn btn-outline-primary">Add</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal: contact form -->
+	<div class="modal fade" id="modal-contact-form" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="modal-contact-form-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal-contact-form-label">Store Contact Form</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="form-contact">
+						<div>
+							<input type="text" name="name" placeholder="product name">
+							<p id="form-add-product-error-name" class="my-error"></p>
+						</div>
+						<div>
+							<input type="text" name="price" placeholder="price ($)">
+							<p id="form-add-product-error-price" class="my-error"></p>
+						</div>
+						<div>
+							Summary <br />
+							<textarea name="summary"></textarea>
+							<p id="form-add-product-error-summary" class="my-error"></p>
+
+						</div>
+
+						<div>
+							<button type="submit" class="btn btn-outline-primary">Send</button>
 						</div>
 					</form>
 				</div>

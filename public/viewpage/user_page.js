@@ -15,6 +15,8 @@ export function addEventListeners() {
     Util.enableButton(Element.menuHome, label);
   });
 
+  //search eventListener ⬇
+
   Element.formSearch.addEventListener("submit", async (e) => {
     e.preventDefault();
     const searchButton = Element.formSearch.getElementsByTagName("button")[0];
@@ -31,6 +33,8 @@ export function addEventListeners() {
     e.target.searchKeyword.value = "";
   });
 }
+//search eventListener ⬆
+
 export let products;
 export let cart;
 

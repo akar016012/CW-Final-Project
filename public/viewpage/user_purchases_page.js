@@ -8,7 +8,7 @@ import { cart } from "./user_page.js";
 
 export function addEventListeners() {
   Element.menuUserPurchases.addEventListener("click", async () => {
-    history.pushState(null, null, Route.routePathnames.PURCHASE);
+    history.pushState(null, null, Route.routePathnames.USERPURCASES);
     const label = Util.disabledButton(Element.menuUserPurchases);
     await user_purchases_page();
     Util.enableButton(Element.menuUserPurchases, label);
@@ -76,6 +76,18 @@ export async function user_purchases_page() {
       Element.modalTransactionBody.innerHTML = buildTransactionView(
         carts[index]
       );
+
+      //review button event
+      const reviewButton = document.getElementsByClassName("form-add-reviews");
+      for (let i = 0; i < reviewButton.length; i++) {
+        reviewButton[i].addEventListener("submit", (e) => {
+          e.preventDefault();
+          const button = e.target.getElementsByTagName("button")[0];
+          const label = Util.disabledButton(button);
+          await Review.product_review(e.target.docId.value);
+          Util.enableButton(button, label);
+        });
+      }
       Element.modalTransactionView.show();
     });
   }
@@ -105,6 +117,13 @@ function buildTransactionView(cart) {
           <td>${item.qty}</td>
           <td>${Util.currency(item.qty * item.price)}</td>
           <td>${item.summary}</td>
+
+          <td>
+            <form class="form-add-reviews" method="post">
+              <input type="hidden" name="docId" value="${item.docId}">
+              <button class="btn btn-success" type="submit"> Review</button>
+            </form>
+        </td>
       </tr>
     `;
   });

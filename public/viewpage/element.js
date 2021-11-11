@@ -15,6 +15,7 @@ export const menuUserProductReview = document.getElementById(
 );
 export const formSearch = document.getElementById("form-search");
 export const formAdminSearch = document.getElementById("form-admin-search");
+export const contactButton = document.getElementById("menu-user-contact");
 
 //admin buttons
 export const menuAdminPurchases = document.getElementById(
@@ -52,6 +53,10 @@ export const formImageAddButton = document.getElementById(
   "form-add-product-image-button"
 );
 
+//contact form.
+export const formContact = {
+  form: document.getElementById("form-contact"),
+};
 //edit products
 export const formEditProduct = {
   form: document.getElementById("form-edit-product"),
@@ -109,6 +114,10 @@ export const formSignUpPasswordError = document.getElementById(
 
 export const modalAddProduct = new bootstrap.Modal(
   document.getElementById("modal-add-product"),
+  { backdrop: "static" }
+);
+export const modalContactForm = new bootstrap.Modal(
+  document.getElementById("modal-contact-form"),
   { backdrop: "static" }
 );
 
