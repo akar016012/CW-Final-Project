@@ -207,15 +207,15 @@ async function addProduct(data, context) {
   }
 }
 //Update Review
-async function updateReview(commentInfo, context) {
+async function updateReview(reveiwInfo, context) {
   try {
     await admin
       .firestore()
       .collection(Constant.collectionNames.REVIEWS)
-      .doc(commentInfo.docId)
-      .update(commentInfo.data);
+      .doc(reveiwInfo.docId)
+      .update(reveiwInfo.data);
   } catch (e) {
     if (Constant.DEV) console.log(e);
-    throw new functions.https.HttpsError("internal", "UpdateComment failed");
+    throw new functions.https.HttpsError("internal", "updateReview failed");
   }
 }

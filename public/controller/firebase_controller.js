@@ -225,7 +225,6 @@ export async function userGetProductById(docId) {
   return prod;
 }
 
-//add review from user
 export async function addReview(comment) {
   const review = await firebase
     .firestore()
