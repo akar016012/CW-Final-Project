@@ -6,6 +6,7 @@ export const menuProfile = document.getElementById("menu-button-profile");
 export const menuShoppingCart = document.getElementById(
   "menu-button-shoppingcart"
 );
+export const customerReview = document.getElementById("menu-customer-review");
 
 //users buttons
 export const menuUserPurchases = document.getElementById("menu-user-purchases");
@@ -127,3 +128,37 @@ export const modalEditProduct = new bootstrap.Modal(
 );
 
 export const shoppingcartCount = document.getElementById("shoppingcart-count");
+
+//review product form
+export const formReviewProduct = document.getElementById("form-review-product");
+export const formReviewImageTag = document.getElementById(
+  "form-review-image-tag"
+);
+export const formReviewProductError = {
+  reviewCommentError: document.getElementById("error-add-review"),
+};
+export const formDeleteReview = document.getElementById("form-review-product");
+
+export const modelReviewProduct = new bootstrap.Modal(
+  document.getElementById("modal-review-product"),
+  { backdrop: "static" }
+);
+
+//update product form
+export const formUpdateReviewProduct = document.getElementById(
+  "form-review-update-product"
+);
+export const formUpdateReviewImageTag = document.getElementById(
+  "form-review-update-image-tag"
+);
+export const formUpdateReviewProductError = {
+  reviewUpdateError: document.getElementById("error-update-review"),
+};
+export const formUpdateDeleteReview = document.getElementById(
+  "form-review-update-product"
+);
+
+export const modelUpdateReviewProduct = new bootstrap.Modal(
+  document.getElementById("modal-review-update"),
+  { backdrop: "static" }
+);

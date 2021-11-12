@@ -9,12 +9,27 @@
 </head>
 
 <body>
-  <td>
-    <form class="form-add-reviews" method="post">
-      <input type="hidden" name="docId" value="${item.docId}">
-      <button class="btn btn-outline-primary" type="submit"> Review</button>
-    </form>
-  </td>
+  <tr id="review-${review.docId}">
+    <td> <img src="${review.imageURL} max-width:50%;"> </td>
+    <td> ${review.productName} </td>
+    <td> ${review.review} </td>
+    <td> ${new Date(review.timestamp).toString()}</td>
+
+    <td>
+      <form class="form-delete-review float-left" method="post">
+        <input type="hidden" name="reviewId" value="${
+              review.docId
+            }">
+        <button class="btn btn-danger" type="submit"> Delete </button>
+      </form>
+      <form class="form-edit-review float-right" method="post">
+        <input type="hidden" name="reviewId" value="${
+              review.docId
+            }">
+        <button class="btn btn-warning" type="submit"> Edit </button>
+      </form>
+    <td>
+  </tr>
 </body>
 
 </html>

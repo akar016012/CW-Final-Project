@@ -40,10 +40,10 @@ export const routes = [
     pathname: routePathnames.USERPURCASES,
     page: UserPurchasePage.user_purchases_page,
   },
-  // {
-  //   pathname: routePathnames.USERREVIEWS,
-  //   page: UserReviewPage.user_reviews_page,
-  // },
+  {
+    pathname: routePathnames.USERREVIEWS,
+    page: UserReviewPage.user_review_page,
+  },
   {
     pathname: routePathnames.USERSHOPPINGCART,
     page: UserShoppingCartPage.user_shopping_cart_page,

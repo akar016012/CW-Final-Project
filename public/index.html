@@ -302,6 +302,80 @@
 			</div>
 		</div>
 	</div>
+	<!-- Modal Review product-->
+	<div class="modal fade" id="modal-review-product" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="modal-review-product-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal-review-product-label">Add Review</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="form-review-product" method="post">
+						<input type="hidden" name="docId">
+						<div>
+							<img id="form-review-image-tag" style="display: block;">
+						</div>
+						<div>
+							Name : <input type="text" name="name" disabled>
+
+						</div>
+						<div>
+							Price : <input type="text" name="price" disabled>
+						</div>
+
+						<div>
+							Review Product : <br> <textarea name="review" cols="50"> </textarea>
+							<p id="error-add-review" class="error-add-product"></p>
+						</div>
+
+						<div>
+							<button type="submit" class="btn btn-success"> Add </button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal Review product-->
+
+	<!-- Modal edit Review product-->
+	<div class="modal fade" id="modal-review-update" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+		aria-labelledby="modal-review-update-label" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="modal-review-update-label">Update Review</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<form id="form-review-update-product" method="post">
+						<input type="hidden" name="docId">
+						<div>
+							<img id="form-review-update-image-tag" style="display: block;">
+						</div>
+						<div>
+							Name : <input type="text" name="name" disabled>
+
+						</div>
+
+
+						<div>
+							Update Product Review: <br> <textarea name="review" cols="50"> </textarea>
+							<p id="error-update-review" class="error-update-product"></p>
+						</div>
+
+						<div>
+							<button type="submit" class="btn btn-success"> Update </button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal edit Review product-->
+
 
 
 	<!-- Modal: popup infobox -->
@@ -334,6 +408,9 @@
 			</div>
 		</div>
 	</div>
+
+
+
 
 	<div id="root" class="bg-light p-5 m-3"></div>
 

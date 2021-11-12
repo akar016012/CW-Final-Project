@@ -5,6 +5,7 @@ import * as Auth from "../controller/auth.js";
 import * as Constant from "../model/constant.js";
 import * as Util from "./util.js";
 import { cart } from "./user_page.js";
+import * as Review from "../controller/user_review_product_page.js";
 
 export function addEventListeners() {
   Element.menuUserPurchases.addEventListener("click", async () => {
@@ -80,12 +81,13 @@ export async function user_purchases_page() {
       //review button event
       const reviewButton = document.getElementsByClassName("form-add-reviews");
       for (let i = 0; i < reviewButton.length; i++) {
-        reviewButton[i].addEventListener("submit", (e) => {
+        reviewButton[i].addEventListener("submit", async (e) => {
           e.preventDefault();
           const button = e.target.getElementsByTagName("button")[0];
           const label = Util.disabledButton(button);
-          await Review.product_review(e.target.docId.value);
+          await Review.review_product(e.target.docId.value);
           Util.enableButton(button, label);
+          Element.modalTransactionView.hide();
         });
       }
       Element.modalTransactionView.show();

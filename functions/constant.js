@@ -4,4 +4,5 @@ exports.adminEmails = ["admin@test.com"];
 
 exports.collectionNames = {
   PRODUCT: "products",
+  REVIEWS: "reviews",
 };

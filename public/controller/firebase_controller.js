@@ -2,6 +2,7 @@ import { AccountInfo } from "../model/account_info.js";
 import { Product } from "../model/Product.js";
 import * as Constant from "../model/constant.js";
 import { ShoppingCart } from "../model/ShoppingCart.js";
+import { Reviews } from "../model/Reviews.js";
 
 export async function signIn(email, password) {
   await firebase.auth().signInWithEmailAndPassword(email, password);
@@ -190,4 +191,75 @@ export async function searchProduct(keyword) {
     productList.push(prod);
   });
   return productList;
+}
+
+//get the list of all reviews
+export async function getReviews(userId) {
+  let userReviews = [];
+  const snapshot = await firebase
+    .firestore()
+    .collection(Constant.collectionNames.REVIEWS)
+    .where("userId", "==", userId)
+    .orderBy("timestamp", "desc")
+    .get();
+  snapshot.forEach((doc) => {
+    const sc = new Reviews(doc.data());
+    sc.docId = doc.id;
+    userReviews.push(sc);
+  });
+  return userReviews;
+}
+
+//user get product by Id
+export async function userGetProductById(docId) {
+  const ref = await firebase
+    .firestore()
+    .collection(Constant.collectionNames.PRODUCTS)
+    .doc(docId)
+    .get();
+  if (!ref.exists) {
+    return null;
+  }
+  const prod = new Product(ref.data());
+  prod.docId = docId;
+  return prod;
+}
+
+//add review from user
+export async function addReview(comment) {
+  const review = await firebase
+    .firestore()
+    .collection(Constant.collectionNames.REVIEWS)
+    .add(comment);
+}
+
+export async function deleteReviewById(docId) {
+  await firebase
+    .firestore()
+    .collection(Constant.collectionNames.REVIEWS)
+    .doc(docId)
+    .delete();
+}
+
+//user get review by Id
+export async function getReviewById(docId) {
+  const ref = await firebase
+    .firestore()
+    .collection(Constant.collectionNames.REVIEWS)
+    .doc(docId)
+    .get();
+  if (!ref.exists) {
+    return null;
+  }
+  const review = new Reviews(ref.data());
+  review.docId = docId;
+  return review;
+}
+
+//Update Product
+const cf_updateReview = firebase.functions().httpsCallable("cf_updateReview");
+export async function updateReview(review) {
+  const docId = review.docId;
+  const data = review.serializeForUpdate();
+  await cf_updateReview({ docId, data });
 }

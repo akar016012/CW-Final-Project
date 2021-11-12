@@ -18,6 +18,7 @@ exports.cf_deleteProduct = functions.https.onCall(deleteProduct);
 exports.cf_getUserList = functions.https.onCall(getUserList);
 exports.cf_updateUser = functions.https.onCall(updateUser);
 exports.cf_deleteUser = functions.https.onCall(deleteUser);
+exports.cf_updateReview = functions.https.onCall(updateReview);
 
 function isAdmin(email) {
   return Constant.adminEmails.includes(email);
@@ -203,5 +204,18 @@ async function addProduct(data, context) {
   } catch (e) {
     if (Constant.DEV) console.log(e);
     throw new functions.https.HttpsError("internal", "addProduct failed");
+  }
+}
+//Update Review
+async function updateReview(commentInfo, context) {
+  try {
+    await admin
+      .firestore()
+      .collection(Constant.collectionNames.REVIEWS)
+      .doc(commentInfo.docId)
+      .update(commentInfo.data);
+  } catch (e) {
+    if (Constant.DEV) console.log(e);
+    throw new functions.https.HttpsError("internal", "UpdateComment failed");
   }
 }
