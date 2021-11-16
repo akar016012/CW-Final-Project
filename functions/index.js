@@ -19,6 +19,8 @@ exports.cf_getUserList = functions.https.onCall(getUserList);
 exports.cf_updateUser = functions.https.onCall(updateUser);
 exports.cf_deleteUser = functions.https.onCall(deleteUser);
 exports.cf_updateReview = functions.https.onCall(updateReview);
+exports.cf_adminDeleteFunction = functions.https.onCall(adminDeleteFunction);
+exports.cf_createUser = functions.https.onCall(createUser);
 
 function isAdmin(email) {
   return Constant.adminEmails.includes(email);
@@ -217,5 +219,37 @@ async function updateReview(reveiwInfo, context) {
   } catch (e) {
     if (Constant.DEV) console.log(e);
     throw new functions.https.HttpsError("internal", "updateReview failed");
+  }
+}
+
+//admin delete function
+
+async function adminDeleteFunction(docId) {
+  try {
+    await admin
+      .firestore()
+      .collection(Constant.collectionNames.REVIEWS)
+      .doc(docId)
+      .delete();
+  } catch (e) {
+    if (Constant.DEV) console.log(e);
+    throw new functions.https.HttpsError(
+      "internal",
+      "adminDeleteFunction failed"
+    );
+  }
+}
+
+//create a user
+
+async function createUser(data, context) {
+  try {
+    await admin.auth().createUser(data);
+  } catch (e) {
+    if (Constant.DEV) console.log(e);
+    throw new functions.https.HttpsError(
+      "internal",
+      "createUserWithEmailAndPassword failed"
+    );
   }
 }

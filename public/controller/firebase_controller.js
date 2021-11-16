@@ -262,3 +262,26 @@ export async function updateReview(review) {
   const data = review.serializeForUpdate();
   await cf_updateReview({ docId, data });
 }
+
+export async function reviewsList() {
+  let reviews = [];
+  const snapshot = await firebase
+    .firestore()
+    .collection(Constant.collectionNames.REVIEWS)
+    .orderBy("timestamp", "desc")
+    .get();
+  snapshot.forEach((doc) => {
+    const r = new Reviews(doc.data());
+    r.docId = doc.id;
+    reviews.push(r);
+  });
+  return reviews;
+}
+
+//admin delete function
+const cf_adminDeleteFunction = firebase
+  .functions()
+  .httpsCallable("cf_adminDeleteFunction");
+export async function adminDeleteFunction(reviewId) {
+  await cf_adminDeleteFunction(reviewId);
+}

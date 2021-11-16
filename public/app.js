@@ -11,6 +11,8 @@ import * as Edit from "./controller/edit_products.js";
 import * as UserReviewProductPage from "./controller/user_review_product_page.js";
 import * as UserReviewPage from "./viewpage/user_reviews_page.js";
 import * as UserEditReview from "./controller/user_edit_review_page.js";
+import * as HomeReviews from "./viewpage/reviews_page.js";
+import * as AdminCheckReview from "./viewpage/admin_review_check_page.js";
 
 Auth.addEventListeners();
 HomePage.addEventListeners();
@@ -24,6 +26,8 @@ Edit.addEventListener();
 UserReviewPage.addEventListeners();
 UserReviewProductPage.addEventListeners();
 UserEditReview.addEventListeners();
+HomeReviews.addEventListeners();
+AdminCheckReview.addEventListeners();
 
 window.onload = () => {
   const path = window.location.pathname;

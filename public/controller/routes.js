@@ -31,7 +31,7 @@ export const routePathnames = {
 export const routes = [
   { pathname: routePathnames.HOME, page: HomePage.home_page },
   { pathname: routePathnames.USER, page: UserPage.user_page },
-  // { pathname: routePathnames.REVIEWs, page: ReviewPage.reviews_page },
+  { pathname: routePathnames.REVIEWS, page: ReviewPage.mainReview },
   {
     pathname: routePathnames.USERPROFILE,
     page: UserProfilePage.user_profile_page,
@@ -57,10 +57,10 @@ export const routes = [
   //   pathname: routePathnames.ADMINPURCHASES,
   //   page: AdminPurchasesPage.admin_purchases_page,
   // },
-  // {
-  //   pathname: routePathnames.ADMINREVIEW,
-  //   page: AdminReviewCheck.admin_review_check_page,
-  // },
+  {
+    pathname: routePathnames.ADMINREVIEW,
+    page: AdminReviewCheck.adminReviewCheck,
+  },
   { pathname: routePathnames.ADMINUSER, page: AdminUserPage.admin_user_page },
 ];
 
